@@ -3,18 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bez∅pasno | Elite Digital Platform</title>
+<title>bez∅pasno | Elite Price</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
 font-family:'Orbitron',sans-serif;
 background:#000;
@@ -22,17 +16,23 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Частицы */
-
-canvas{
+/* АНИМИРОВАННЫЙ ФОН */
+body::before{
+content:"";
 position:fixed;
-top:0;
-left:0;
+width:200%;
+height:200%;
+background:radial-gradient(circle at center,#00f7ff22,transparent 40%);
+animation:bgMove 8s linear infinite;
 z-index:-1;
 }
 
-/* HERO */
+@keyframes bgMove{
+0%{transform:translate(-25%,-25%) rotate(0deg);}
+100%{transform:translate(-25%,-25%) rotate(360deg);}
+}
 
+/* HERO */
 .hero{
 height:100vh;
 display:flex;
@@ -40,284 +40,179 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:20px;
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-.hero.show{
-opacity:1;
-transform:translateY(0);
 }
 
 .hero h1{
-font-size:75px;
-font-weight:900;
+font-size:90px;
 color:#00f7ff;
-text-shadow:0 0 40px #00f7ff;
-margin-bottom:20px;
+text-shadow:0 0 40px #00f7ff,0 0 80px #00f7ff;
+animation:glow 2s ease-in-out infinite alternate;
+margin-bottom:40px;
 }
 
-.hero p{
-max-width:950px;
-font-size:18px;
-line-height:1.8;
-margin-bottom:40px;
-opacity:0.9;
+@keyframes glow{
+from{text-shadow:0 0 20px #00f7ff;}
+to{text-shadow:0 0 80px #00f7ff;}
 }
 
 .btn{
-padding:18px 55px;
-border-radius:15px;
+padding:20px 60px;
+border-radius:20px;
 background:linear-gradient(45deg,#00f7ff,#0066ff);
 color:white;
 text-decoration:none;
-box-shadow:0 0 40px #00f7ff;
-transition:0.4s;
 font-weight:bold;
+font-size:18px;
+box-shadow:0 0 40px #00f7ff;
+transition:0.3s;
+cursor:pointer;
 }
 
 .btn:hover{
-transform:scale(1.1);
-box-shadow:0 0 80px #00f7ff;
+transform:scale(1.15);
+box-shadow:0 0 100px #00f7ff;
 }
 
-/* SECTION */
-
-.section{
+/* PRICE SECTION */
+.price-section{
 padding:120px 10%;
 text-align:center;
 opacity:0;
-transform:translateY(40px);
-transition:1s;
+transform:translateY(80px);
+transition:1.2s;
 }
 
-.section.show{
+.price-section.show{
 opacity:1;
 transform:translateY(0);
 }
 
-.section h2{
-font-size:38px;
-margin-bottom:60px;
+.price-section h2{
+font-size:45px;
+margin-bottom:70px;
 color:#00f7ff;
 }
 
-.section p{
-max-width:1000px;
-margin:auto;
-margin-bottom:40px;
-line-height:1.8;
-font-size:16px;
-opacity:0.9;
-}
-
 /* GRID */
-
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:40px;
-margin-top:40px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:50px;
 }
 
 .card{
-padding:45px;
+padding:50px;
 border-radius:25px;
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(15px);
-box-shadow:0 0 40px rgba(0,247,255,0.3);
-transition:0.5s;
+box-shadow:0 0 40px rgba(0,247,255,0.4);
+transition:0.4s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(45deg,transparent,#00f7ff33,transparent);
+transform:rotate(45deg);
+transition:0.6s;
+}
+
+.card:hover::before{
+top:-20%;
+left:-20%;
 }
 
 .card:hover{
 transform:translateY(-15px) scale(1.05);
-box-shadow:0 0 80px rgba(0,247,255,0.8);
+box-shadow:0 0 80px rgba(0,247,255,1);
 }
 
 .card h3{
-margin-bottom:20px;
+font-size:24px;
+margin-bottom:15px;
+}
+
+.price{
+font-size:32px;
 color:#00f7ff;
 }
 
-/* СТАТИСТИКА */
-
-.stats{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:80px;
-margin-top:60px;
+/* BUY */
+.buy{
+margin-top:100px;
+font-size:26px;
 }
 
-.stat{
-font-size:50px;
-color:#00f7ff;
-text-shadow:0 0 20px #00f7ff;
-}
-
-.stat span{
-display:block;
-font-size:14px;
-margin-top:10px;
-color:white;
-}
-
-/* FOOTER */
-
-footer{
-background:#000;
-padding:60px;
-text-align:center;
-font-size:14px;
-}
-
-footer a{
+.buy a{
 color:#00f7ff;
 text-decoration:none;
+font-weight:bold;
+transition:0.3s;
 }
 
-@media(max-width:768px){
-.hero h1{font-size:45px;}
+.buy a:hover{
+text-shadow:0 0 20px #00f7ff;
 }
 </style>
 </head>
-<body>
 
-<canvas id="particles"></canvas>
+<body>
 
 <section class="hero">
 <h1>bez∅pasno</h1>
-<p>
-bez∅pasno — это премиальное digital-сообщество, ориентированное на Telegram,
-онлайн-инструменты и современные возможности цифровой среды.
-Проект создан для тех, кто хочет разбираться в платформе глубже,
-понимать её функционал и использовать её возможности эффективно.
-</p>
-<a class="btn" href="https://t.me/bezopasno_xd" target="_blank">
-Присоединиться к Telegram
-</a>
+<button class="btn" onclick="showPrice()">Прайс</button>
 </section>
 
-<section class="section">
-<h2>О ПРОЕКТЕ</h2>
-<p>
-В канале публикуются подробные разборы возможностей Telegram,
-обновления платформы, цифровые инструменты и практические рекомендации.
-Контент ориентирован на пользователей, которые интересуются
-развитием в digital-направлении и хотят получать структурированную информацию.
-</p>
-</section>
-
-<section class="section">
-<h2>ЧТО ВЫ ПОЛУЧИТЕ</h2>
+<section class="price-section" id="price">
+<h2>ELITE PRICE</h2>
 
 <div class="grid">
+
 <div class="card">
-<h3>Разборы Функций</h3>
-<p>Подробные объяснения новых возможностей и инструментов Telegram.</p>
+<h3>Индия</h3>
+<div class="price">45₽</div>
 </div>
 
 <div class="card">
-<h3>Практические Материалы</h3>
-<p>Информация, которую можно применять сразу после прочтения.</p>
+<h3>США</h3>
+<div class="price">45₽</div>
 </div>
 
 <div class="card">
-<h3>Digital Обзоры</h3>
-<p>Актуальные сервисы и инструменты для онлайн-работы.</p>
+<h3>Маньяма</h3>
+<div class="price">45₽</div>
 </div>
 
 <div class="card">
-<h3>Регулярные Обновления</h3>
-<p>Свежие публикации и системный подход к подаче материала.</p>
-</div>
+<h3>Украина</h3>
+<div class="price">45₽</div>
 </div>
 
-<div class="stats">
-<div class="stat" data-target="24">0<span>Часа в сутки</span></div>
-<div class="stat" data-target="7">0<span>Дней в неделю</span></div>
-<div class="stat" data-target="100">0<span>Фокус на актуальность</span></div>
+<div class="card">
+<h3>Улан-Удэ</h3>
+<div class="price">45₽</div>
 </div>
+
+</div>
+
+<div class="buy">
+Купить: <a href="https://t.me/Xzxwes" target="_blank">@Xzxwes</a>
+</div>
+
 </section>
-
-<section class="section">
-<h2>ПОЧЕМУ BEZ∅PASNO</h2>
-<p>
-Проект ориентирован на качественную подачу информации,
-чёткую структуру и современный визуальный стиль.
-bez∅pasno — это не просто канал, а digital-платформа,
-где внимание уделяется содержанию, актуальности и удобству восприятия.
-</p>
-</section>
-
-<footer>
-© 2026 bez∅pasno<br><br>
-Telegram:
-<a href="https://t.me/bezopasno_xd" target="_blank">
-@bezopasno_xd
-</a>
-</footer>
 
 <script>
-
-/* Частицы */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particlesArray = [];
-for(let i=0;i<120;i++){
-particlesArray.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:2,
-speedX:(Math.random()-0.5),
-speedY:(Math.random()-0.5)
-});
+function showPrice(){
+const section = document.getElementById("price");
+section.classList.add("show");
+section.scrollIntoView({behavior:"smooth"});
 }
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particlesArray.forEach(p=>{
-p.x+=p.speedX;
-p.y+=p.speedY;
-ctx.fillStyle="#00f7ff";
-ctx.fillRect(p.x,p.y,p.size,p.size);
-});
-requestAnimationFrame(animate);
-}
-animate();
-
-/* Скролл анимация */
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-});
-document.querySelectorAll('.hero,.section').forEach(el=>{
-observer.observe(el);
-});
-
-/* Счётчики */
-const counters = document.querySelectorAll('.stat');
-counters.forEach(counter=>{
-const update = ()=>{
-const target = +counter.getAttribute('data-target');
-const count = +counter.innerText;
-const speed = target/50;
-if(count<target){
-counter.innerText = Math.ceil(count+speed);
-setTimeout(update,40);
-}
-};
-update();
-});
-
 </script>
 
 </body>
