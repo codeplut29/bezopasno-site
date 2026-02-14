@@ -17,22 +17,6 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Фон */
-body::before{
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:radial-gradient(circle,#00f7ff22 0%,transparent 60%);
-animation:rotateBg 20s linear infinite;
-z-index:-1;
-}
-
-@keyframes rotateBg{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
 /* HERO */
 .hero{
 min-height:100vh;
@@ -58,7 +42,6 @@ opacity:0.9;
 margin-bottom:40px;
 }
 
-/* Кнопки */
 .buttons{
 display:flex;
 gap:20px;
@@ -84,7 +67,7 @@ transform:translateY(-3px);
 box-shadow:0 0 40px rgba(0,247,255,1);
 }
 
-/* PRICE SECTION */
+/* PRICE */
 .price-section{
 padding:120px 10%;
 text-align:center;
@@ -106,7 +89,7 @@ color:#00f7ff;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:35px;
 }
 
@@ -114,55 +97,54 @@ gap:35px;
 padding:30px;
 border-radius:15px;
 background:rgba(255,255,255,0.05);
-transition:0.3s;
 box-shadow:0 0 20px rgba(0,247,255,0.2);
 }
 
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 40px rgba(0,247,255,0.7);
+.card h3{
+margin-bottom:10px;
 }
 
 .price{
-margin:10px 0 15px;
+margin-bottom:15px;
 color:#00f7ff;
 font-size:18px;
 }
 
-.pay-btn{
-display:inline-block;
-padding:8px 18px;
+/* Payment block */
+.card-pay{
+margin-top:10px;
+font-size:13px;
+line-height:1.6;
+opacity:0.9;
+}
+
+.card-number{
+font-size:18px;
+color:#00f7ff;
+margin:8px 0;
+letter-spacing:3px;
+}
+
+.copy-btn{
+margin-top:5px;
+padding:6px 15px;
+font-size:12px;
 background:#00f7ff;
 color:#000;
-border-radius:8px;
-text-decoration:none;
-font-size:12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
 transition:0.3s;
 }
 
-.pay-btn:hover{
+.copy-btn:hover{
 background:#fff;
 }
 
-/* THANKS SECTION */
-.thanks-section{
-display:none;
-padding:120px 20px;
-text-align:center;
-background:#000;
-}
-
-.thanks-section h2{
-color:#00f7ff;
-margin-bottom:20px;
-font-size:26px;
-}
-
-.thanks-section p{
-max-width:600px;
-margin:0 auto;
-line-height:1.6;
-opacity:0.9;
+.after-pay{
+margin-top:10px;
+font-size:12px;
+opacity:0.8;
 }
 </style>
 </head>
@@ -175,7 +157,6 @@ opacity:0.9;
 <p>
 Канал о Telegram и цифровых возможностях.
 Рабочие инструменты, актуальные решения и стабильный сервис.
-Быстро. Удобно. Надёжно.
 </p>
 
 <div class="buttons">
@@ -189,74 +170,25 @@ opacity:0.9;
 
 <div class="grid">
 
-<!-- Карточки -->
-
 <div class="card">
-<h3>Индия</h3>
+<h3>Все позиции</h3>
 <div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
 
-<div class="card">
-<h3>США</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
+<div class="card-pay">
+<p>Оплата по номеру карты:</p>
+<p class="card-number" id="cardNumber">2202 2082 1192 6895</p>
 
-<div class="card">
-<h3>Маньяма</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
+<button class="copy-btn" onclick="copyCard()">Скопировать</button>
 
-<div class="card">
-<h3>Украина</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
-
-<div class="card">
-<h3>Улан-Удэ</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
-
-<div class="card">
-<h3>Балангеш</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
-
-<div class="card">
-<h3>Гана</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
-
-<div class="card">
-<h3>Таиланд</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
-
-<div class="card">
-<h3>Индонезия</h3>
-<div class="price">45₽</div>
-<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
-</div>
-
-</div>
-</section>
-
-<!-- THANK YOU BLOCK -->
-
-<section class="thanks-section" id="thanks">
-<h2>Спасибо за покупку!</h2>
-<p>
-Вот ваш чек.<br><br>
-Напишите <strong>@Xzxwes</strong> со скриншотом чека,<br>
-и вам выдадут товар.
+<p class="after-pay">
+После перевода отправьте скриншот чека в Telegram 
+<strong>@Xzxwes</strong>
 </p>
+</div>
+
+</div>
+
+</div>
 </section>
 
 <script>
@@ -266,11 +198,10 @@ section.classList.add("show");
 section.scrollIntoView({behavior:"smooth"});
 }
 
-function showThanks(){
-setTimeout(()=>{
-document.getElementById("thanks").style.display="block";
-document.getElementById("thanks").scrollIntoView({behavior:"smooth"});
-},500);
+function copyCard(){
+const text = document.getElementById("cardNumber").innerText;
+navigator.clipboard.writeText(text);
+alert("Номер карты скопирован");
 }
 </script>
 
