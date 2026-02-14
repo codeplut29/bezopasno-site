@@ -9,6 +9,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
 font-family:'Orbitron',sans-serif;
 background:#000;
@@ -16,12 +17,20 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Частицы */
-canvas{
+/* Фон */
+body::before{
+content:"";
 position:fixed;
-top:0;
-left:0;
+width:200%;
+height:200%;
+background:radial-gradient(circle,#00f7ff22 0%,transparent 60%);
+animation:rotateBg 20s linear infinite;
 z-index:-1;
+}
+
+@keyframes rotateBg{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 /* HERO */
@@ -36,16 +45,16 @@ padding:40px 20px;
 }
 
 .hero h1{
-font-size:48px; /* меньше */
+font-size:40px;
 color:#00f7ff;
 margin-bottom:20px;
 letter-spacing:3px;
 }
 
 .hero p{
-max-width:700px;
+max-width:750px;
 line-height:1.6;
-opacity:0.85;
+opacity:0.9;
 margin-bottom:40px;
 }
 
@@ -59,27 +68,28 @@ justify-content:center;
 
 .btn{
 padding:14px 35px;
-border-radius:12px;
+border-radius:10px;
 background:linear-gradient(45deg,#00f7ff,#0066ff);
 color:white;
 text-decoration:none;
 font-size:14px;
 transition:0.3s;
-box-shadow:0 0 20px rgba(0,247,255,0.5);
+box-shadow:0 0 20px rgba(0,247,255,0.6);
 cursor:pointer;
+border:none;
 }
 
 .btn:hover{
 transform:translateY(-3px);
-box-shadow:0 0 40px rgba(0,247,255,0.9);
+box-shadow:0 0 40px rgba(0,247,255,1);
 }
 
-/* PRICE */
+/* PRICE SECTION */
 .price-section{
-padding:100px 10%;
+padding:120px 10%;
 text-align:center;
 opacity:0;
-transform:translateY(60px);
+transform:translateY(80px);
 transition:1s;
 }
 
@@ -90,14 +100,14 @@ transform:translateY(0);
 
 .price-section h2{
 font-size:28px;
-margin-bottom:50px;
+margin-bottom:60px;
 color:#00f7ff;
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:30px;
+gap:35px;
 }
 
 .card{
@@ -105,68 +115,148 @@ padding:30px;
 border-radius:15px;
 background:rgba(255,255,255,0.05);
 transition:0.3s;
+box-shadow:0 0 20px rgba(0,247,255,0.2);
 }
 
 .card:hover{
 transform:translateY(-5px);
-background:rgba(0,247,255,0.1);
+box-shadow:0 0 40px rgba(0,247,255,0.7);
 }
 
 .price{
-margin-top:10px;
+margin:10px 0 15px;
 color:#00f7ff;
-}
-
-.buy{
-margin-top:60px;
 font-size:18px;
 }
 
-.buy a{
-color:#00f7ff;
+.pay-btn{
+display:inline-block;
+padding:8px 18px;
+background:#00f7ff;
+color:#000;
+border-radius:8px;
 text-decoration:none;
+font-size:12px;
+transition:0.3s;
+}
+
+.pay-btn:hover{
+background:#fff;
+}
+
+/* THANKS SECTION */
+.thanks-section{
+display:none;
+padding:120px 20px;
+text-align:center;
+background:#000;
+}
+
+.thanks-section h2{
+color:#00f7ff;
+margin-bottom:20px;
+font-size:26px;
+}
+
+.thanks-section p{
+max-width:600px;
+margin:0 auto;
+line-height:1.6;
+opacity:0.9;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
-
 <section class="hero">
 <h1>bez∅pasno</h1>
 
 <p>
-Digital-канал о Telegram, онлайн-инструментах и актуальных возможностях.
-Полезные материалы, разборы и рабочие решения без лишнего шума.
+Канал о Telegram и цифровых возможностях.
+Рабочие инструменты, актуальные решения и стабильный сервис.
+Быстро. Удобно. Надёжно.
 </p>
 
 <div class="buttons">
 <a class="btn" href="https://t.me/bezopasno_xd" target="_blank">Telegram</a>
 <button class="btn" onclick="showPrice()">Прайс</button>
 </div>
-
 </section>
 
 <section class="price-section" id="price">
 <h2>Прайс</h2>
 
 <div class="grid">
-<div class="card"><h3>Индия</h3><div class="price">45₽</div></div>
-<div class="card"><h3>США</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Маньяма</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Украина</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Улан-Удэ</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Балангеш</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Гана</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Таиланд</h3><div class="price">45₽</div></div>
-<div class="card"><h3>Индонезия</h3><div class="price">45₽</div></div>
+
+<!-- Карточки -->
+
+<div class="card">
+<h3>Индия</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
 </div>
 
-<div class="buy">
-Купить: <a href="https://t.me/Xzxwes" target="_blank">@Xzxwes</a>
+<div class="card">
+<h3>США</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
 </div>
 
+<div class="card">
+<h3>Маньяма</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+<div class="card">
+<h3>Украина</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+<div class="card">
+<h3>Улан-Удэ</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+<div class="card">
+<h3>Балангеш</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+<div class="card">
+<h3>Гана</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+<div class="card">
+<h3>Таиланд</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+<div class="card">
+<h3>Индонезия</h3>
+<div class="price">45₽</div>
+<a class="pay-btn" href="https://vtb.paymo.ru/collect-money/qr/?transaction=49c807ea-1d50-4d1f-b8b0-c8f0fbdb5b57" target="_blank" onclick="showThanks()">Оплатить</a>
+</div>
+
+</div>
+</section>
+
+<!-- THANK YOU BLOCK -->
+
+<section class="thanks-section" id="thanks">
+<h2>Спасибо за покупку!</h2>
+<p>
+Вот ваш чек.<br><br>
+Напишите <strong>@Xzxwes</strong> со скриншотом чека,<br>
+и вам выдадут товар.
+</p>
 </section>
 
 <script>
@@ -176,34 +266,12 @@ section.classList.add("show");
 section.scrollIntoView({behavior:"smooth"});
 }
 
-/* Частицы */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let particles=[];
-for(let i=0;i<80;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:2,
-speedX:(Math.random()-0.5),
-speedY:(Math.random()-0.5)
-});
+function showThanks(){
+setTimeout(()=>{
+document.getElementById("thanks").style.display="block";
+document.getElementById("thanks").scrollIntoView({behavior:"smooth"});
+},500);
 }
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{
-p.x+=p.speedX;
-p.y+=p.speedY;
-ctx.fillStyle="#00f7ff";
-ctx.fillRect(p.x,p.y,p.size,p.size);
-});
-requestAnimationFrame(animate);
-}
-animate();
 </script>
 
 </body>
