@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bez∅pasno | Elite Price</title>
+<title>bez∅pasno | V6 Cosmic</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -14,22 +14,15 @@ font-family:'Orbitron',sans-serif;
 background:#000;
 color:white;
 overflow-x:hidden;
+perspective:1000px;
 }
 
-/* АНИМИРОВАННЫЙ ФОН */
-body::before{
-content:"";
+/* Canvas фон */
+canvas{
 position:fixed;
-width:200%;
-height:200%;
-background:radial-gradient(circle at center,#00f7ff22,transparent 40%);
-animation:bgMove 8s linear infinite;
+top:0;
+left:0;
 z-index:-1;
-}
-
-@keyframes bgMove{
-0%{transform:translate(-25%,-25%) rotate(0deg);}
-100%{transform:translate(-25%,-25%) rotate(360deg);}
 }
 
 /* HERO */
@@ -43,43 +36,43 @@ text-align:center;
 }
 
 .hero h1{
-font-size:90px;
+font-size:100px;
 color:#00f7ff;
-text-shadow:0 0 40px #00f7ff,0 0 80px #00f7ff;
-animation:glow 2s ease-in-out infinite alternate;
-margin-bottom:40px;
+text-shadow:0 0 40px #00f7ff;
+animation:pulse 2s infinite alternate;
+margin-bottom:50px;
 }
 
-@keyframes glow{
-from{text-shadow:0 0 20px #00f7ff;}
-to{text-shadow:0 0 80px #00f7ff;}
+@keyframes pulse{
+from{transform:scale(1);}
+to{transform:scale(1.07);}
 }
 
 .btn{
-padding:20px 60px;
-border-radius:20px;
+padding:22px 70px;
+border-radius:30px;
 background:linear-gradient(45deg,#00f7ff,#0066ff);
 color:white;
-text-decoration:none;
+font-size:20px;
 font-weight:bold;
-font-size:18px;
-box-shadow:0 0 40px #00f7ff;
-transition:0.3s;
+border:none;
 cursor:pointer;
+box-shadow:0 0 50px #00f7ff;
+transition:0.4s;
 }
 
 .btn:hover{
 transform:scale(1.15);
-box-shadow:0 0 100px #00f7ff;
+box-shadow:0 0 120px #00f7ff;
 }
 
 /* PRICE SECTION */
 .price-section{
-padding:120px 10%;
+padding:150px 10%;
 text-align:center;
 opacity:0;
-transform:translateY(80px);
-transition:1.2s;
+transform:translateY(100px);
+transition:1.5s;
 }
 
 .price-section.show{
@@ -89,7 +82,7 @@ transform:translateY(0);
 
 .price-section h2{
 font-size:45px;
-margin-bottom:70px;
+margin-bottom:80px;
 color:#00f7ff;
 }
 
@@ -104,33 +97,21 @@ gap:50px;
 padding:50px;
 border-radius:25px;
 background:rgba(255,255,255,0.05);
-backdrop-filter:blur(15px);
+backdrop-filter:blur(20px);
 box-shadow:0 0 40px rgba(0,247,255,0.4);
-transition:0.4s;
-position:relative;
-overflow:hidden;
+transition:0.5s;
+opacity:0;
+transform:translateY(40px) rotateX(10deg);
 }
 
-.card::before{
-content:"";
-position:absolute;
-top:-50%;
-left:-50%;
-width:200%;
-height:200%;
-background:linear-gradient(45deg,transparent,#00f7ff33,transparent);
-transform:rotate(45deg);
-transition:0.6s;
-}
-
-.card:hover::before{
-top:-20%;
-left:-20%;
+.card.show{
+opacity:1;
+transform:translateY(0) rotateX(0deg);
 }
 
 .card:hover{
-transform:translateY(-15px) scale(1.05);
-box-shadow:0 0 80px rgba(0,247,255,1);
+transform:rotateY(15deg) scale(1.05);
+box-shadow:0 0 100px rgba(0,247,255,1);
 }
 
 .card h3{
@@ -139,13 +120,19 @@ margin-bottom:15px;
 }
 
 .price{
-font-size:32px;
+font-size:34px;
 color:#00f7ff;
+animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #00f7ff;}
+to{text-shadow:0 0 40px #00f7ff;}
 }
 
 /* BUY */
 .buy{
-margin-top:100px;
+margin-top:120px;
 font-size:26px;
 }
 
@@ -153,9 +140,7 @@ font-size:26px;
 color:#00f7ff;
 text-decoration:none;
 font-weight:bold;
-transition:0.3s;
 }
-
 .buy a:hover{
 text-shadow:0 0 20px #00f7ff;
 }
@@ -164,40 +149,27 @@ text-shadow:0 0 20px #00f7ff;
 
 <body>
 
+<canvas id="particles"></canvas>
+
 <section class="hero">
 <h1>bez∅pasno</h1>
 <button class="btn" onclick="showPrice()">Прайс</button>
 </section>
 
 <section class="price-section" id="price">
-<h2>ELITE PRICE</h2>
+<h2>COSMIC PRICE LIST</h2>
 
 <div class="grid">
 
-<div class="card">
-<h3>Индия</h3>
-<div class="price">45₽</div>
-</div>
-
-<div class="card">
-<h3>США</h3>
-<div class="price">45₽</div>
-</div>
-
-<div class="card">
-<h3>Маньяма</h3>
-<div class="price">45₽</div>
-</div>
-
-<div class="card">
-<h3>Украина</h3>
-<div class="price">45₽</div>
-</div>
-
-<div class="card">
-<h3>Улан-Удэ</h3>
-<div class="price">45₽</div>
-</div>
+<div class="card"><h3>Индия</h3><div class="price">45₽</div></div>
+<div class="card"><h3>США</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Маньяма</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Украина</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Улан-Удэ</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Балангеш</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Гана</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Таиланд</h3><div class="price">45₽</div></div>
+<div class="card"><h3>Индонезия</h3><div class="price">45₽</div></div>
 
 </div>
 
@@ -209,10 +181,44 @@ text-shadow:0 0 20px #00f7ff;
 
 <script>
 function showPrice(){
-const section = document.getElementById("price");
+const section=document.getElementById("price");
 section.classList.add("show");
 section.scrollIntoView({behavior:"smooth"});
+
+const cards=document.querySelectorAll(".card");
+cards.forEach((card,index)=>{
+setTimeout(()=>{card.classList.add("show");}, index*120);
+});
 }
+
+/* Частицы */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<120;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2,
+speedX:(Math.random()-0.5),
+speedY:(Math.random()-0.5)
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.speedX;
+p.y+=p.speedY;
+ctx.fillStyle="#00f7ff";
+ctx.fillRect(p.x,p.y,p.size,p.size);
+});
+requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>
