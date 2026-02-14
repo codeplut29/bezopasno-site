@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>bezopasno</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -62,7 +62,6 @@ max-width:750px;
 line-height:1.6;
 opacity:0.9;
 margin-bottom:40px;
-animation:fadeIn 2s ease forwards;
 }
 
 .buttons{
@@ -104,10 +103,33 @@ opacity:1;
 transform:translateY(0);
 }
 
+/* 🔥 АНИМАЦИЯ ПРАЙСА */
 .price-section h2{
-font-size:30px;
-margin-bottom:60px;
+font-size:36px;
 color:#00f7ff;
+margin-bottom:20px;
+animation:neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse{
+from{text-shadow:0 0 10px #00f7ff;}
+to{text-shadow:0 0 40px #00f7ff;}
+}
+
+/* Линия под прайсом */
+.price-section h2::after{
+content:"";
+display:block;
+width:0;
+height:3px;
+background:#00f7ff;
+margin:15px auto 40px;
+animation:lineGrow 1.5s forwards;
+}
+
+@keyframes lineGrow{
+from{width:0;}
+to{width:120px;}
 }
 
 /* GRID */
@@ -173,11 +195,6 @@ margin-top:8px;
 font-size:11px;
 opacity:0.8;
 }
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
 </style>
 </head>
 
@@ -199,7 +216,6 @@ to{opacity:1;}
 
 <section class="price-section" id="price">
 <h2>Прайс</h2>
-
 <div class="grid" id="grid"></div>
 </section>
 
